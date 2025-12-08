@@ -40,10 +40,17 @@ graph LR
         broker -->|WebSockets| dashboard["3D Web Dashboard (Three.js)"]
     end
 ```
+1.Input Source: Simulates an IP Camera RTSP stream.
+
+2.Edge AI Node (C++): Handles hardware-accelerated decoding, TensorRT inference, and data serialization.
+
+3.Message Broker: Eclipse Mosquitto bridging TCP (for C++) and WebSockets (for Web).
+
+4.Digital Twin Dashboard: Visualizes the structured data (bounding boxes, classes) in a 3D space.
 ---
 
+## 🛠️ Tech Stack
 
-Tech Stack
 Component,Technology
 Language,"C++17, Python 3.8, JavaScript (ES6)"
 AI Kernel,"NVIDIA TensorRT 8.6, CUDA 12.x, YOLOv8"
