@@ -54,24 +54,28 @@ graph LR
 
 |Component|Technology|
 |-----|-----|
-Language,"C++17, Python 3.8, JavaScript (ES6)"
-AI Kernel,"NVIDIA TensorRT 8.6, CUDA 12.x, YOLOv8"
-Computer Vision,OpenCV 4.5 (C++ API)
-Infrastructure,"Docker, WSL2 (Ubuntu 22.04)"
-Communication,"Eclipse Mosquitto (MQTT), Paho MQTT C++"
-Visualization,Three.js (WebGL)
+|Language|"C++17, Python 3.8, JavaScript (ES6)"|
+|AI Kernel|"NVIDIA TensorRT 8.6, CUDA 12.x, YOLOv8"|
+|Computer Vision|OpenCV 4.5 (C++ API)|
+|Infrastructure|"Docker, WSL2 (Ubuntu 22.04)"|
+|Communication|"Eclipse Mosquitto (MQTT), Paho MQTT C++"|
+|Visualization|Three.js (WebGL)|
 
-Quick Start
+---
+
+## ⚡ Quick Start
 Prerequisites
-NVIDIA GPU (Compute Capability 7.0+)
+* NVIDIA GPU (Compute Capability 7.0+)
 
-Docker & NVIDIA Container Toolkit
+* Docker & NVIDIA Container Toolkit
 
-Linux Environment (Ubuntu 20.04+ or WSL2)
+* Linux Environment (Ubuntu 20.04+ or WSL2)
 
 1.Clone the Repository
+```Bash!
 git clone [https://github.com/mv670810/edge-ai-traffic-twin.git](https://github.com/mv670810/edge-ai-traffic-twin.git)
 cd edge-ai-traffic-twin
+```
 
 2.Build the AI Environment (Docker)
 docker build -t traffic-cpp-env -f docker/Dockerfile.cpp .
