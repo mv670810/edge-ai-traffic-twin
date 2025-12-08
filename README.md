@@ -26,28 +26,21 @@ The system follows a strict **Edge-to-Cloud** data flow pattern:
 
 ```mermaid
 graph LR
-    source[RTSP Stream Simulator] -->|H.264 Video| ai_node(Edge AI Node<br/>C++ / TensorRT)
+    source["RTSP Stream Simulator"] -->|H.264 Video| ai_node("Edge AI Node (C++ / TensorRT)")
     
-    subgraph Edge Device
-        ai_node -->|1. Decode & Resize| opencv[OpenCV CUDA]
-        opencv -->|2. Inference| trt{TensorRT Engine<br/>FP16}
-        trt -->|3. NMS & Serialize| json[JSON Payload]
+    subgraph Edge_Device [Edge Device]
+        ai_node -->|1. Decode| opencv["OpenCV CUDA"]
+        opencv -->|2. Inference| trt{"TensorRT Engine (FP16)"}
+        trt -->|3. Serialize| json["JSON Payload"]
     end
 
-    json -->|MQTT Publish| broker(Mosquitto Broker)
+    json -->|MQTT Publish| broker("Mosquitto Broker")
     
-    subgraph User Client
-        broker -->|WebSockets| dashboard[3D Web Dashboard<br/>Three.js]
+    subgraph User_Client [User Client]
+        broker -->|WebSockets| dashboard["3D Web Dashboard (Three.js)"]
     end
-
-Input Source: Simulates an IP Camera RTSP stream.
-
-Edge AI Node (C++): Handles hardware-accelerated decoding, TensorRT inference, and data serialization.
-
-Message Broker: Eclipse Mosquitto bridging TCP (for C++) and WebSockets (for Web).
-
-Digital Twin Dashboard: Visualizes the structured data (bounding boxes, classes) in a 3D space.
-
+```
+---
 
 
 Tech Stack
