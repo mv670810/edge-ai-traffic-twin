@@ -145,6 +145,10 @@ cd web && python3 -m http.server 8000
 │   └── yolov8n.onnx          # AI Model Source
 └── README.md
 ```
+---
+
+## Hackmd
+https://hackmd.io/@mv67081077/SJaTOhQGbx
 
 ---
 
