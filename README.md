@@ -78,11 +78,15 @@ cd edge-ai-traffic-twin
 ```
 
 2.Build the AI Environment (Docker)
+We use a custom Dockerfile to handle C++ dependencies (OpenCV, Paho MQTT, TensorRT).
+```Bash!
 docker build -t traffic-cpp-env -f docker/Dockerfile.cpp .
+```
 
 3.Build TensorRT Engine
 Place your yolov8n.onnx in the data/ folder. Then, compile the engine inside the container:
 
+```Bash!
 # Compiles ONNX to TensorRT Engine with FP16 precision and Dynamic Shapes support
 docker run --rm --gpus all -v $(pwd):/app -w /app/src traffic-cpp-env \
     /usr/src/tensorrt/bin/trtexec \
@@ -92,30 +96,42 @@ docker run --rm --gpus all -v $(pwd):/app -w /app/src traffic-cpp-env \
     --minShapes=images:1x3x640x640 \
     --optShapes=images:1x3x640x640 \
     --maxShapes=images:1x3x640x640
+```
 
 4.Launch the System
 Step 1: Start MQTT Broker (Supports both TCP and WebSockets)
+```Bash!
 docker run -d --name mqtt-broker \
   -p 1883:1883 -p 9001:9001 \
   -v $(pwd)/docker/mosquitto/mosquitto.conf:/mosquitto/config/mosquitto.conf \
   eclipse-mosquitto
+```
 
 Step 2: Start Video Simulation
+```Bash!
 source .venv/bin/activate
 python3 src/stream_sim.py
+```
 
 Step 3: Start AI Inference Node (C++)
+```Bash
 docker run --rm --gpus all --net=host \
   -v $(pwd):/app -w /app/src \
   traffic-cpp-env \
   bash -c "mkdir -p build && cd build && cmake .. && make && ./traffic_app"
+```
 
 Step 4: Start Web Dashboard
+```Bash
 cd web && python3 -m http.server 8000
+```
 
-Access the dashboard at http://localhost:8000.
+* Access the dashboard at **http://localhost:8000.**
 
-Directory Structure
+---
+
+## 📂 Directory Structure
+```Plaintext!
 ├── docker/
 │   ├── Dockerfile.cpp        # C++ Development Environment Setup
 │   └── mosquitto/            # MQTT Broker Configuration
@@ -128,7 +144,12 @@ Directory Structure
 ├── data/
 │   └── yolov8n.onnx          # AI Model Source
 └── README.md
+```
 
+---
+
+## 📄 License
+Distributed under the MIT License.
 
 
 
