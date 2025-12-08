@@ -1,0 +1,22 @@
+# 忽略編譯產物
+build/
+*.o
+*.so
+
+# 忽略 Python 虛擬環境與快取
+.venv/
+__pycache__/
+
+# 忽略 IDE 設定檔
+.vscode/
+.idea/
+
+# 忽略 TensorRT 引擎 (因為它是綁定顯卡的，別人不能跑)
+data/*.engine
+
+# 忽略 Docker 暫存
+docker/mosquitto/data/
+docker/mosquitto/log/
+
+# (可選) 如果影片檔太大 (>100MB)，也要忽略
+# data/*.mp4

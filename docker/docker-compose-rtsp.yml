@@ -1,0 +1,7 @@
+version: '3'
+services:
+  rtsp-server:
+    image: bluenviron/mediamtx:latest
+    container_name: traffic-rtsp-server
+    network_mode: host  # 使用 host 模式，讓 port 直接對應本機，方便除錯
+    restart: unless-stopped
