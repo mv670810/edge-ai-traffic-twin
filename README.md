@@ -150,7 +150,7 @@ cd web && python3 -m http.server 8000
 
 ## 🎥 Demo
 https://youtu.be/NaJ5JHa8c8Q
-Performance Note: On an NVIDIA RTX 3060 Laptop GPU
+- Performance Note: On an NVIDIA RTX 3060 Laptop GPU
 
 ---
 
